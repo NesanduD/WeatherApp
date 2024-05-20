@@ -54,7 +54,7 @@ else:
                 precip_probability = li.find('span', {'class': 'fw-bold'}).get_text(strip=True)
                 weather_atlas_percentage_values.append(precip_probability)
                 # Break out of the loop since we found the desired value
-                break
+                break # testing purpose
 
 # Weathercom code
 if weathercom_response.status_code != 200:
