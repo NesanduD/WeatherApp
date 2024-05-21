@@ -9,18 +9,49 @@ header = Headers(
         headers=False,  # generate misc headers
         )
 
+# functions
+def responses(url):  
+    return requests.get(url, headers=header.generate())
+
 # URLS
 accuweather_url    = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/309472?apikey=IeS7q8uvP3iefn51Qa4ReCfNihJgrGqU&details=true&metric=true'
 weathercom_url     = 'https://weather.com/weather/tenday/l/746ec06059a777b4fe27c23654cd84da9bf2c4f2ebc7ee53f098aaf52d94eb87'
 weatheratlas_url   = 'https://www.weather-atlas.com/en/sri-lanka/kuruwita-long-term-weather-forecast'
 timeanddatecom_url = 'https://www.timeanddate.com/weather/@1237940/ext'
+msn_url            = 'https://www.msn.com/en-us/weather/forecast/in-Kuruwita,Sabaragamuwa-Province?loc=eyJsIjoiS3VydXdpdGEiLCJyIjoiU2FiYXJhZ2FtdXdhIFByb3ZpbmNlIiwicjIiOiJSYXRuYXB1cmEgRGlzdHJpY3QiLCJjIjoiU3JpIExhbmthIiwiaSI6IkxLIiwidCI6MTAyLCJnIjoiZW4tdXMiLCJ4IjoiODAuMzY2OSIsInkiOiI2Ljc3NjEifQ%3D%3D&weadegreetype=C&cvid=4223c3f4c8dd462f9acbe0807eed5833'
+
 
 # Responses
-accuweather_response = requests.get(accuweather_url, headers=header.generate())
-weathercom_response = requests.get(weathercom_url,headers=header.generate())
-weather_atlas_response = requests.get(weatheratlas_url,headers=header.generate())
-timeaddatecom_response = requests.get(timeanddatecom_url,headers=header.generate())
+accuweather_response   = responses(accuweather_url)
+weathercom_response    = responses(weathercom_url)
+weather_atlas_response = responses(weatheratlas_url)
+timeaddatecom_response = responses(timeanddatecom_url)
+msn_response           = responses(msn_url)
 
+
+#msn code
+if msn_response.status_code != 200:
+    print("Connection failed with msn.com. Error code: ",msn_response.status_code)
+else:
+    print("connection established with msn.com. ")
+    msn_html = requests.get(msn_url).text
+    
+    # msn.com soupobject
+    msn_soup = BeautifulSoup(msn_html,'html.parser')
+    precip_elements = msn_soup.find_all('div', {'title': 'Precipitation'})
+    print(precip_elements)
+
+    for precip_element in precip_elements:
+        # Find all span elements inside the current precipitation div
+        span_elements = precip_element.find_all('span')
+        today_precipitation_percentage = span_elements[1].text.strip()
+        print(today_precipitation_percentage)
+        # still only today weather scraped. need to scrape msn tomorrow too
+
+
+            
+    
+'''
 # Timeanddatecom code
 if timeaddatecom_response.status_code != 200:
     print("Connection failed with timeandweather.com. Error code: ",timeaddatecom_response.status_code)
@@ -29,7 +60,16 @@ else:
     timeanddatecom_html = requests.get(timeanddatecom_url).text
     #timeanddate.com soupobject
     timeanddatecom_soup = BeautifulSoup(timeanddatecom_html,'html.parser')
-    
+    td_elements = timeanddatecom_soup.find_all('td',{'class':'sep'})
+    timeanddatecom_percentage_values = []
+
+    for td in td_elements:
+        # Extract text content
+        text = td.get_text()
+
+        # Check if the text is a percentage value
+        if '%' in text:
+            timeanddatecom_percentage_values.append(text)
 
 # Weather-atlas code
 if weather_atlas_response.status_code !=200:
@@ -91,7 +131,10 @@ else:
     # Preciptitation information
     today_precipitation_accuweather = accuweather_precipitation_probability[0]
     tomorrow_precipitation_accuweather = accuweather_precipitation_probability[1]
-    
+
+
+    '''   
+
 ''' weathercom output
 Percentage Value: 96% today rain
 Percentage Value: 96% today rain
@@ -181,3 +224,8 @@ Precip. probability: 76%
 Precip. probability: 67%
 Precip. probability: 60%
 Precip. probability: 60%'''
+
+'''timeanddatecom output
+easy. firstone today second tomorrow'''
+
+
