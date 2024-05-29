@@ -40,10 +40,10 @@ tomorrow_rain_day = []  # array for tomorrow daytime rain probablity
 tomorrow_rain_night = []  # array for tomorrow night rain prob.
 
 # URLS
-accuweather_url = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/309472?apikey=IeS7q8uvP3iefn51Qa4ReCfNihJgrGqU&details=true&metric=true'
-weathercom_url = 'https://weather.com/weather/tenday/l/fb23578d1e77fc9465448c2aa52f6e72e9b5f380bada48f4e626070fe3920cb2'
-weatheratlas_url = 'https://www.weather-atlas.com/en/sri-lanka/kuruwita-weather-tomorrow'
-timeanddatecom_url = 'https://www.timeanddate.com/weather/@1237940/ext'
+accuweather_url = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/837535?apikey=IeS7q8uvP3iefn51Qa4ReCfNihJgrGqU&details=true&metric=true'
+weathercom_url = 'https://weather.com/weather/tenday/l/48df01ee9c0aadc73b846a4dc6c2074d9e87a951e2e69f33f70ce7e14dbc0ecf'
+weatheratlas_url = 'https://www.weather-atlas.com/en/sri-lanka/katubedda-weather-tomorrow'
+timeanddatecom_url = 'https://www.timeanddate.com/weather/@1241019/ext'
 
 # Responses
 accuweather_response = responses(accuweather_url)
@@ -137,4 +137,4 @@ data = [
 ]
 
 # Print the results in a tabulated format
-print(tabulate(data, headers=["Period", "Rain Probability (%)", "Sources Count"], tablefmt="pretty"))
+print(tabulate(data, headers=["Period", "Rain Probability (%)", "Used sources Count"], tablefmt="pretty"))
