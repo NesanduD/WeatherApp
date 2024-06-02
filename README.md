@@ -92,6 +92,3 @@ Contributions are welcome! Please create a pull request or submit an issue if yo
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
----
-
-By keeping the README focused on the main aspects and adding a section for functions and outputs, you provide necessary information without making the document too lengthy.
