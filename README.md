@@ -1,42 +1,97 @@
-# Weather Data Aggregator ( AI GENERATED TEST README)
+# Weather App README
 
-## Overview
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Prerequisites](#prerequisites)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Functions](#functions)
+7. [Outputs](#outputs)
+8. [Contributing](#contributing)
+9. [License](#license)
 
-This project aims to aggregate weather data from multiple weather service providers to generate a more accurate and reliable forecast. By collecting data from various sources and analyzing them, we aim to provide users with a comprehensive overview of the weather conditions.
+## Introduction
+This Weather App is a Python-based tool designed to scrape weather data from multiple sources, calculate the average rain probability, and display the results in a user-friendly tabulated format. The data is specifically gathered for the University of Moratuwa located in Katubedda, Sri Lanka.
 
 ## Features
+- Scrapes weather data from multiple sources:
+  - MSN
+  - Weather.com
+  - AccuWeather
+  - Weather-Atlas
+  - DateAndTime.com
+- Calculates average rain probability for today and tomorrow, both daytime and nighttime.
+- Displays data in a clear tabulated format.
 
-- **Data Aggregation**: Collects weather data from multiple weather service providers.
-- **Data Analysis**: Analyzes the collected data to generate a more accurate forecast.
-- **User-Friendly Interface**: Provides an easy-to-use interface for users to access weather information.
+## Prerequisites
+- Python 3.x
+- The following Python libraries:
+  - requests
+  - beautifulsoup4
+  - fake_headers
+  - tabulate
 
-## How it Works
-
-1. **Data Collection**: The program scrapes weather data from various weather service providers, including [provider1], [provider2], and [provider3].
-
-2. **Data Processing**: The collected data is processed and analyzed to eliminate discrepancies and errors.
-
-3. **Aggregated Forecast**: Based on the processed data, the program generates an aggregated forecast, providing users with a more accurate representation of the weather conditions.
+## Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/weather-app.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd weather-app
+   ```
+3. Install the required libraries:
+   ```bash
+   pip install requests beautifulsoup4 fake_headers tabulate
+   ```
 
 ## Usage
+Run the script to fetch and display the weather data:
+```bash
+python weather_app.py
+```
 
-To use the Weather Data Aggregator:
+## Functions
+### Imports
+```python
+import requests
+from bs4 import BeautifulSoup
+from fake_headers import Headers
+import sys
+import time
+import json
+from tabulate import tabulate
+```
+These libraries are used for making HTTP requests, parsing HTML, faking headers for requests, handling JSON data, and formatting output.
 
-1. Clone the repository to your local machine.
-2. Install the required dependencies (`requirements.txt`).
-3. Run the main script (`weather_aggregator.py`) to fetch weather data and generate the forecast.
+### Custom Functions
+- **`responses(url)`**: Makes a GET request to the given URL with the specified headers.
+- **`status_check(resp)`**: Checks if the response status code is not 200.
+- **`average(array_name)`**: Calculates the average of an array of numbers.
+- **`connecting_animation()`**: Displays a connecting animation.
 
-## Contributors
+## Outputs
+The script displays the weather data in a tabulated format, showing the average rain probability for different periods.
 
-- [Your Name] - Project Lead & Developer
-- [Contributor 1] - Developer
-- [Contributor 2] - Developer
+Example output:
+```
++-----------------+---------------------+-------------------+
+|     Period      | Rain Probability (%)| Used sources Count|
++-----------------+---------------------+-------------------+
+|  Today Daytime  |        45.67        |         3         |
+|  Today Nighttime|        30.50        |         3         |
+| Tomorrow Daytime|        55.33        |         3         |
+| Tomorrow Nighttime|      40.00        |         3         |
++-----------------+---------------------+-------------------+
+```
+
+## Contributing
+Contributions are welcome! Please create a pull request or submit an issue if you have any improvements or bug fixes.
 
 ## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
 
-## Acknowledgments
-
-- Special thanks to [Weather Provider 1], [Weather Provider 2], and [Weather Provider 3] for providing access to their weather data.
-- Inspiration for this project came from the need for a more accurate and reliable weather forecast.
+By keeping the README focused on the main aspects and adding a section for functions and outputs, you provide necessary information without making the document too lengthy.
